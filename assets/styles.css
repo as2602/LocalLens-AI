@@ -1,0 +1,35 @@
+/* Sidebar background */
+[data-testid="stSidebar"] {
+    background-color: #111827;
+    padding: 20px;
+}
+
+/* Sidebar ALL TEXT white */
+[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+}
+
+/* Sidebar page links (Home, News, Weather, etc.) */
+[data-testid="stSidebar"] a {
+    color: #ffffff !important;      /* text white */
+    border: 1px solid #ffffff;      /* border white */
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+/* Hover effect */
+[data-testid="stSidebar"] a:hover {
+    background-color: #2563EB;
+    color: #ffffff !important;
+}
+
+/* Active page highlight */
+[data-testid="stSidebar"] a[aria-current="page"] {
+    background-color: #1E40AF;
+    border: 1px solid #ffffff;
+}
+
