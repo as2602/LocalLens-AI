@@ -1,3 +1,16 @@
+/* =========================
+   GLOBAL APP BASE
+========================= */
+
+/* Default app background text */
+.stApp {
+    color: white;
+}
+
+/* =========================
+   SIDEBAR STYLING
+========================= */
+
 /* Sidebar background */
 [data-testid="stSidebar"] {
     background-color: #111827;
@@ -9,10 +22,10 @@
     color: #ffffff !important;
 }
 
-/* Sidebar page links (Home, News, Weather, etc.) */
+/* Sidebar page links */
 [data-testid="stSidebar"] a {
-    color: #ffffff !important;      /* text white */
-    border: 1px solid #ffffff;      /* border white */
+    color: #ffffff !important;
+    border: 1px solid #ffffff;
     font-size: 16px;
     padding: 10px;
     border-radius: 8px;
@@ -27,9 +40,146 @@
     color: #ffffff !important;
 }
 
-/* Active page highlight */
+/* Active page */
 [data-testid="stSidebar"] a[aria-current="page"] {
     background-color: #1E40AF;
     border: 1px solid #ffffff;
+}
+
+/* =============================
+   SELECTBOX & INPUT FIX
+============================= */
+
+/* Selected value text */
+div[data-baseweb="select"] span {
+    color: #000000 !important;
+}
+
+/* Search text inside selectbox */
+div[data-baseweb="select"] input {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+/* Dropdown background */
+ul[data-baseweb="menu"] {
+    background-color: #ffffff !important;
+}
+
+/* Dropdown option text */
+ul[data-baseweb="menu"] li {
+    color: #000000 !important;
+}
+
+/* Hover option */
+ul[data-baseweb="menu"] li:hover {
+    background-color: #E5E7EB !important;
+    color: #000000 !important;
+}
+
+/* Placeholder text */
+div[data-baseweb="select"] ::placeholder {
+    color: #6B7280 !important;
+}
+
+/* 🔒 SAFETY: selectbox should NEVER inherit global text color */
+.stApp [data-baseweb="select"] * {
+    color: #000000 !important;
+}
+
+/* =========================
+   GLOBAL TEXT (SAFE)
+========================= */
+
+/* Headings */
+.stApp h1,
+.stApp h2,
+.stApp h3 {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+/* Normal content text (NO span here – important fix) */
+.stApp p,
+.stApp li {
+    color: #E5E7EB !important;
+}
+
+/* =========================
+   METRICS
+========================= */
+
+[data-testid="stMetricValue"] {
+    color: #ffffff !important;
+    font-size: 28px;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #CBD5E1 !important;
+}
+
+/* =========================
+   BUTTONS (FIXED & POLISHED)
+========================= */
+
+.stButton > button {
+    background-color: #2563EB !important;
+    color: #ffffff !important;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stButton > button:hover {
+    background-color: #1E40AF !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 64, 175, 0.45);
+}
+/* =========================
+   METRIC VISIBILITY FIX
+========================= */
+
+/* Metric value (9+, 8+) — force strong white */
+[data-testid="stMetricValue"] {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    font-weight: 700;
+}
+
+/* Metric label — slightly muted (professional) */
+[data-testid="stMetricLabel"] {
+    color: #CBD5E1 !important;
+    opacity: 1 !important;
+}
+/* =========================
+   DASHBOARD METRIC CARDS
+========================= */
+
+.metric-card {
+    background: linear-gradient(145deg, #0F172A, #020617);
+    border: 1px solid #1E293B;
+    border-radius: 18px;
+    padding: 22px 26px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    height: 100%;
+}
+
+.metric-title {
+    font-size: 16px;
+    color: #CBD5E1;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.metric-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: #FFFFFF;
 }
 
