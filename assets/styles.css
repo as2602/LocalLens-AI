@@ -183,3 +183,19 @@ div[data-baseweb="select"] ::placeholder {
     color: #FFFFFF;
 }
 
+/* =========================
+   TOGGLE SWITCH FIX
+========================= */
+
+div[data-testid="stToggle"] {
+    border: 1px solid #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* Toggle label */
+div[data-testid="stToggle"] label {
+    color: #ffffff !important;
+    font-weight: 600;
+}
