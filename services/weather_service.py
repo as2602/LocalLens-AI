@@ -1,53 +1,3 @@
-# import os
-# import requests
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# API_KEY = os.getenv("WEATHER_API_KEY")
-# BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
-
-
-# def get_current_weather(city, unit="metric"):
-#     """
-#     unit = metric (Celsius)
-#     unit = imperial (Fahrenheit)
-#     """
-#     if not API_KEY:
-#         return None, "API key not found"
-
-#     params = {
-#         "q": city,
-#         "appid": API_KEY,
-#         "units": unit
-#     }
-
-#     try:
-#         response = requests.get(BASE_URL, params=params, timeout=10)
-
-#         if response.status_code != 200:
-#             return None, "City not found"
-
-#         data = response.json()
-
-#         weather_data = {
-#             "city": data["name"],
-#             "country": data["sys"]["country"],
-#             "temperature": data["main"]["temp"],
-#             "humidity": data["main"]["humidity"],
-#             "wind": data["wind"]["speed"],
-#             "condition": data["weather"][0]["main"],
-#             "description": data["weather"][0]["description"],
-#             "icon": data["weather"][0]["icon"]
-#         }
-
-#         return weather_data, None
-
-#     except Exception as e:
-#         return None, str(e)
-
-
-
 import requests
 import os
 from dotenv import load_dotenv
@@ -76,11 +26,10 @@ def get_current_weather(city, unit="metric"):
     response = requests.get(url, params=params)
 
     if response.status_code != 200:
-        return None, "City not found or API error"
+        return None, f"API Error: {response.json().get('error', {}).get('message', 'Unknown error')}"
 
     data = response.json()
 
-    # Unit handling
     temperature = (
         data["current"]["temp_c"]
         if unit == "metric"
@@ -88,13 +37,47 @@ def get_current_weather(city, unit="metric"):
     )
 
     weather_data = {
-        "city": data["location"]["name"],
-        "country": data["location"]["country"],
-        "temperature": temperature,
-        "humidity": data["current"]["humidity"],
-        "wind": data["current"]["wind_kph"],
-        "condition": data["current"]["condition"]["text"],
-        "icon": "https:" + data["current"]["condition"]["icon"]
-    }
-
+    "city": data["location"]["name"],
+    "country": data["location"]["country"],
+    "temperature": temperature,
+    "humidity": data["current"]["humidity"],
+    "wind": data["current"]["wind_kph"],
+    "condition": data["current"]["condition"]["text"],
+    "icon": "https:" + data["current"]["condition"]["icon"],
+    "is_day": data["current"]["is_day"] ,
+    "lat": data["location"]["lat"],
+    "lon": data["location"]["lon"]
+ 
+}
     return weather_data, None
+
+
+def get_5day_forecast(city, unit="metric"):
+   
+
+    days = 5
+
+    url = f"http://api.weatherapi.com/v1/forecast.json?key={API_KEY}&q={city}&days={days}"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        if response.status_code != 200:
+            return None, data.get("error", {}).get("message", "Error fetching forecast")
+
+        forecast_data = []
+
+        for day in data["forecast"]["forecastday"]:
+            forecast_data.append({
+                "date": day["date"],
+                "temp": day["day"]["avgtemp_c"] if unit == "metric" else day["day"]["avgtemp_f"],
+                "condition": day["day"]["condition"]["text"],
+                "icon": "https:" + day["day"]["condition"]["icon"]
+            })
+
+        return forecast_data, None
+
+    except Exception as e:
+        return None, str(e)
+
