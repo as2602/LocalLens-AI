@@ -21,8 +21,7 @@ if "unit" not in st.session_state:
     st.session_state.unit = "metric"
 
 if "city" not in st.session_state:
-    st.session_state.city = "Delhi"
-
+    st.session_state.city = "Delhi,IN"
 # -------------------------
 # HEADER
 # -------------------------
@@ -41,11 +40,13 @@ with col2:
 
 with col3:
     search = st.button("Search")
-
+ 
 st.session_state.unit = "imperial" if toggle else "metric"
 unit_symbol = "°C" if st.session_state.unit == "metric" else "°F"
 
 if search:
+    if "," not in city:
+        city = city + ",IN"
     st.session_state.city = city
 
 # -------------------------
@@ -108,14 +109,6 @@ if st.session_state.city:
         # =====================
         st.subheader("📅 3-Day Forecast")
 
-        # forecast_cols = st.columns(5)
-
-        # for i in range(5):
-        #     with forecast_cols[i]:
-        #         st.write(forecast[i]["date"])
-        #         st.image(forecast[i]["icon"], width=60)
-        #         st.write(f"{forecast[i]['temp']} {unit_symbol}")
-        #         st.caption(forecast[i]["condition"])
 
     if error2:
         st.error(error2)

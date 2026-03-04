@@ -22,6 +22,7 @@ def get_current_weather(city, unit="metric"):
         "q": city,
         "aqi": "no"
     }
+    
 
     response = requests.get(url, params=params)
 
