@@ -106,7 +106,7 @@ if st.session_state.city:
         # =====================
         # 5 DAY FORECAST
         # =====================
-        st.subheader("📅 5-Day Forecast")
+        st.subheader("📅 3-Day Forecast")
 
         # forecast_cols = st.columns(5)
 
