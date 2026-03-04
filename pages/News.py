@@ -2,6 +2,7 @@ import streamlit as st
 from services.news_service import get_news, COUNTRIES, CATEGORIES, LANGUAGES
 from components.news_card import news_card
 from utils.theme import load_css, apply_page_theme
+from utils.helpers import add_bookmark
 
 # ----- COMMON UI -----
 st.set_page_config(
